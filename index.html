@@ -131,5 +131,36 @@
       eyeClosed.classList.toggle('hidden', !isHidden);
     });
   </script>
+  // Firebase Configuration (Yahan apni details daalein)
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+// Login Function
+const loginForm = document.querySelector('form');
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // Page reload hone se rokne ke liye
+  
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      alert("Welcome back!");
+      // Yahan aap user ko dusre page par redirect kar sakte hain
+    })
+    .catch((error) => {
+      alert("Error: " + error.message);
+    });
+});
+  
 </body>
 </html>
